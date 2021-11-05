@@ -1,7 +1,6 @@
 import { React, useState } from "react";
 
 const Search = (props) => {
-  const [keyword, setKeyword] = useState("");
   const handleSubmit = (event) => {
     event.preventDefault();
     props.findBooks(props.keyword);
@@ -9,17 +8,17 @@ const Search = (props) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <p style={{ color: "purple" }}>
-          {keyword && "Keywords Typed: " + keyword}
-        </p>
         <label>
-          Book name:{" "}
+          Book name:
           <input
             value={props.keyword}
-            onChange={(e) => setKeyword(e.target.value)}
+            onChange={(e) => props.setKeyword(e.target.value)}
           />
+          <p style={{ color: "purple" }}>
+            {props.keyword && "Keywords Typed: " + props.keyword}
+          </p>
+          <input type="submit" />
         </label>
-        <input type="submit" />
       </form>
     </div>
   );

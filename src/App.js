@@ -10,10 +10,11 @@ import data from "./models/local-books.json";
 const App = () => {
   const [books, setBooks] = useState(data);
   const [bookcase, setBookcase] = useState([]);
+  const [keyword, setKeyword] = useState("");
 
   async function findBooks(value) {
     const url = `https://www.googleapis.com/books/v1/volumes?q=${value}&filter=paid-ebooks&print-type=books&projection=lite`;
-    const results = fetch(url).then((res) => res.json());
+    const results = await fetch(url).then((res) => res.json());
     if (!results.error) {
       setBooks(results.items);
     }
@@ -59,7 +60,12 @@ const App = () => {
           render={() => (
             <Fragment>
               <Header bookLength={bookcase.length} />
-              <Search findBooks={findBooks} />
+              <Search
+                findBooks={findBooks}
+                keyword={keyword}
+                setKeyword={setKeyword}
+              />
+
               <BookList
                 books={books}
                 stored="library"
@@ -74,7 +80,11 @@ const App = () => {
           render={() => (
             <Fragment>
               <Header bookLength={bookcase.length} />
-              <Search findBooks={findBooks} />
+              <Search
+                findBooks={findBooks}
+                keyword={keyword}
+                setKeyword={setKeyword}
+              />
               <BookList
                 books={bookcase}
                 stored="bookcase"
