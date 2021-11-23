@@ -13,6 +13,9 @@ const Book = ({ book, ...props }) => {
       imageLinks: { thumbnail },
     },
   } = book;
+  console.log(book);
+  console.log(props.stored);
+  console.log(props);
 
   return (
     <div className="book">
@@ -37,7 +40,7 @@ const Book = ({ book, ...props }) => {
         {props.stored === "library" ? (
           <button
             className="add-button"
-            onClick={() => props.addToBookcase(id)}
+            onClick={() => props.addToBookcase(book)}
           >
             + Add
           </button>

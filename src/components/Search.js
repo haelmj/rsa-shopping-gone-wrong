@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import React from "react";
 
 const Search = (props) => {
   const handleSubmit = (event) => {
@@ -14,9 +14,6 @@ const Search = (props) => {
             value={props.keyword}
             onChange={(e) => props.setKeyword(e.target.value)}
           />
-          <p style={{ color: "purple" }}>
-            {props.keyword && "Keywords Typed: " + props.keyword}
-          </p>
           <input type="submit" />
         </label>
       </form>
