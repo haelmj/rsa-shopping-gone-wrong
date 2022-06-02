@@ -3,9 +3,14 @@ import Book from "./Book";
 import PropTypes from "prop-types";
 
 const BookList = ({ books, ...props }) => {
+
+  React.useEffect(() => {
+    props.calculateBookcase && props.calculateBookcase();
+  })
   return (
     <div className="list">
       <div>
+        {props.price && <button className="checkout-button" onClick={props.handleCheckout}> Checkout </button>}
         {props.stored === "library" && <h2>Suggested Reading</h2>}
         {books.length === 0 ? (
           <div className="empty">No books...</div>

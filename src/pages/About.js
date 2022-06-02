@@ -1,18 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Header from "../components/Header";
 
 const About = (props) => {
   return (
-    <div className="header">
-      <h1>About</h1>
+    <div>
       <div className="breadcrumb">
-        <Link to="/"> Home </Link> |<Link to="/about"> About </Link> |
-        <Link to="/bookcase" className="bookLink">
-          {" "}
-          Bookcase ({props.bookLength})
-        </Link>
+        <Header bookLength={props.bookcaseLength}/>
       </div>
-      <div className="page">Welcome to the Bookcase Application.</div>
+      <p className="page">I have no information about myself. I promise it's just books but I am a secret lover of the Web Application Hackers Handbook and so I occasionally do free giveaways.</p>
+      <p className="page">You probably already figured this out but my styling(css) is really horrible.</p>
+      <p className="page">I don't want to bore you much. <b>Go ahead and purchase some books!!!</b></p>
     </div>
   );
 };

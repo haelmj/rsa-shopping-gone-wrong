@@ -14,7 +14,7 @@ const Search = (props) => {
             value={props.keyword}
             onChange={(e) => props.setKeyword(e.target.value)}
           />
-          <input type="submit" />
+          <input type="submit" value='Search'/>
         </label>
       </form>
     </div>

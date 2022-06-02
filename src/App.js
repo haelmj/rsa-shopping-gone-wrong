@@ -11,6 +11,8 @@ const App = () => {
   const [books, setBooks] = useState(data);
   const [bookcase, setBookcase] = useState([]);
   const [keyword, setKeyword] = useState("");
+  const [price, setPrice] = useState(0);
+
 
   async function findBooks(value) {
     const url = `https://www.googleapis.com/books/v1/volumes?q=${value}&filter=paid-ebooks&print-type=books&projection=lite`;
@@ -18,6 +20,29 @@ const App = () => {
     if (!results.error) {
       setBooks(results.items);
     }
+  }
+
+  const handleCheckout = async () => {
+    console.log('called')
+    const result = await fetch('/checkout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "price": price,
+        "books": [...bookcase.map((book)=> book.volumeInfo.title)]
+      })
+    }).then((res) => res.text());
+    window.alert(result);
+  }
+
+  const calculateBookcase = () => {
+    let amount = 0;
+    bookcase.forEach((book)=>{
+      book.saleInfo.retailPrice ? amount += book.saleInfo.retailPrice.amount : amount += 0;
+    })
+    setPrice(amount);
   }
 
   const addToBookcase = (id) => {
@@ -79,24 +104,27 @@ const App = () => {
           path="/bookcase"
           render={() => (
             <Fragment>
-              <Header bookLength={bookcase.length} />
+              <Header bookLength={bookcase.length} price={price}/>
               <Search
                 findBooks={findBooks}
                 keyword={keyword}
                 setKeyword={setKeyword}
               />
               <BookList
+                price={price}
                 books={bookcase}
+                handleCheckout={handleCheckout}
                 stored="bookcase"
                 addToBookcase={addToBookcase}
                 removeFromBookcase={removeFromBookcase}
+                calculateBookcase={calculateBookcase}
               />
             </Fragment>
           )}
         />
         <Route
           path="/about"
-          component={() => <About bookLength={bookcase.length} />}
+          component={() => <About bookcaseLength={bookcase.length} />}
         />
       </div>
     </Router>

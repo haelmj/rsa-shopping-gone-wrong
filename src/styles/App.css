@@ -58,7 +58,20 @@ a {
 }
 .book .add-button {
   background-color: rgb(79, 149, 255);
+  cursor: pointer;
 }
+
+.checkout-button {
+  background-color: rgb(79, 149, 255);
+  cursor: pointer;
+  padding: 8px 10px;
+  border: 0px;
+  border-radius: 5px;
+  min-width: 80px;
+  color: #fff;
+  font-size: 1.1em;
+}
+
 .book .remove-button {
   padding: 10px 15px;
   border: 0px;
@@ -69,6 +82,7 @@ a {
   background-color: #bd1515;
   font-weight: bold;
   font-size: 1.2em;
+  cursor: pointer;
 }
 
 .searchBar {
