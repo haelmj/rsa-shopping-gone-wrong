@@ -10,11 +10,13 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.static("build"));
 
 app.post('/checkout', (req, res) => {
-    console.log(req.body);
-    if("The Web Application Hacker's Handbook" in req.body.books && req.body.price.tofixed(2) === 0.00){
+    console.log(req.body.books);
+    console.log(req.body.books.includes("The Web Application Hacker's Handbook"));
+    console.log(req.body.price === 0)
+    if(req.body.books.includes("The Web Application Hacker's Handbook") && req.body.price === 0){
         res.send("RSA{083ca5d909c9b1505add4c96103c3e54}");
     }
-    else if(req.body.price == 0.00 && req.body.books.length !== 0){
+    else if(req.body.price === 0 && req.body.books.length !== 0){
         res.send('Giveaways aren\'t for all books in the library.');
     } else {
         res.send("Checkout successful!");
